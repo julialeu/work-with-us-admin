@@ -6,7 +6,9 @@
     <br><br>
     <label for="password">Password</label>&nbsp
     <input v-model="password" type="password" id="password" name="password" placeholder="Password..."><br>
-    <a href="#" @click="submit">Login</a>
+    <a href="#" @click="submit">Login</a><br>
+    <RouterLink to="/register">¿No tienes usuario? Regístrate!</RouterLink>
+
 
   </form>
 </div>
