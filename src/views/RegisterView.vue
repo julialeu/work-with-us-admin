@@ -50,6 +50,8 @@ export default {
 
           document.cookie = "accessToken=" + accessToken;
 
+
+
           this.$router.push('dashboard');
           // code that can access both here
         })
