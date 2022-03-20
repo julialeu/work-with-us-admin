@@ -50,21 +50,13 @@ export default {
 
           document.cookie = "accessToken=" + accessToken;
 
-
-
           this.$router.push('dashboard');
-          // code that can access both here
         })
-        // console.log("Request complete! response:", res.json());
-      })
-      ;
+      });
 
-      console.log('Registrate!');
-      //this.$refs.form.$el.submit()
+      console.log('Register...');
     }
-
   }
-
 }
 </script>
 

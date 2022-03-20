@@ -3,6 +3,8 @@ import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import DashboardView from "../views/DashboardView.vue";
+import CreateJobVacancyView from "../views/CreateJobVacancyView.vue";
+import ListJobVacanciesView from "../views/ListJobVacanciesView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +29,18 @@ const router = createRouter({
       name: "dashboard",
       component: DashboardView,
     },
+    {
+      path: "/create-job-vacancy",
+      name: "create-job-vacancy",
+      component: CreateJobVacancyView,
+    },
+
+    {
+      path: "/list-job-vacancies",
+      name: "list-job-vacancies",
+      component: ListJobVacanciesView,
+    },
+
     {
       path: "/about",
       name: "about",

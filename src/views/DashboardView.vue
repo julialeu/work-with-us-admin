@@ -1,8 +1,10 @@
 <template>
 
-  <p>Bienvenido {{ username }} </p>&nbsp
-  <div id="published">
-    <a id="offers">Tus ofertas publicadas</a> &nbsp; <a id="applied">Ofertas a las que te has inscrito</a>
+  <div>
+    <p>Bienvenido {{ username }} </p>&nbsp
+    <div id="published">
+      <a id="offers">Tus ofertas publicadas</a> &nbsp; <a id="applied">Ofertas a las que te has inscrito</a>
+    </div>
   </div>
 
 </template>

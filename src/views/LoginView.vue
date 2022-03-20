@@ -27,25 +27,25 @@ export default {
   methods : {
     submit: function () {
 
-
-      let data = {email: this.email,
-                  password: this.password};
+      let data = {
+        email: this.email,
+        password: this.password
+      };
 
       fetch("http://localhost/api/auth/login", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
       }).then(res => {
-        console.log("Request complete! response:", res);
+        res.json().then(parsedJson => {
+          const accessToken = parsedJson['access_token'];
+          document.cookie = "accessToken=" + accessToken;
+          this.$router.push('dashboard');
+        })
       });
 
-      console.log('Submit');
-
-      //this.$refs.form.$el.submit()
+      console.log('Submit...');
     }
-
-
-
   }
 
 }
