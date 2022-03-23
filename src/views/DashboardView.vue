@@ -3,7 +3,8 @@
   <div>
     <p>Bienvenido {{ username }} </p>&nbsp
     <div id="published">
-      <a id="offers">Tus ofertas publicadas</a> &nbsp; <a id="applied">Ofertas a las que te has inscrito</a>
+      <a id="offers">Tus ofertas publicadas</a> &nbsp; <a id="applied">Ofertas a las que te has inscrito</a><br>
+      <RouterLink to="/list-job-vacancies">Tus ofertas creadas</RouterLink>
     </div>
   </div>
 

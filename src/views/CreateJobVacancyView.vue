@@ -4,6 +4,8 @@
   <form>
     <label for="title">Título:</label>&nbsp
     <input v-model="title" type="text" id="title" name="title"><br>
+    <label for="description">Descripción:</label>&nbsp
+    <input v-model="description" type="text" id="description" name="description"><br>
     <label for="company">Empresa:</label>&nbsp
     <input v-model="company" type="text" id="company" name="company"><br>
     <label for="location">Localidad:</label>&nbsp
@@ -35,6 +37,7 @@ export default {
   data: function () {
     return {
       title: '',
+      description: '',
       company: '',
       location: '',
       modality: '',
@@ -47,6 +50,7 @@ export default {
     submit: function () {
 
       let data = { title: this.title,
+                    description: this.description,
                     company: this.company,
                     location: this.location,
                     modality: this.modality,
