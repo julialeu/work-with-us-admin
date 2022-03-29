@@ -13,6 +13,7 @@
           <th>Modalidad</th>
           <th>Fecha creación</th>
         </tr>
+
         <tr v-for="item in jobVacancies.items">
           <td>{{ item.id }}</td>
           <td>{{ item.title }}</td>
