@@ -27,8 +27,8 @@
     </div>
 
     <div class="pagination">
-      <a href="#" class="w3-button">&laquo; Anterior</a>
-      &nbsp;
+      <a :class="{ 'disabled' : !isPreviousButtonEnabled}" href="#" @click="goToPreviousPage" class="w3-button">&laquo;
+        Anterior</a>
       &nbsp;
       <a :class="{ 'disabled' : !isNextButtonEnabled}" href="#" @click="goToNextPage" class="w3-button">Siguiente
         &raquo;</a>
@@ -45,11 +45,12 @@ export default {
       jobVacancies: [],
       currentNumPage: 1,
       isNextButtonEnabled: true,
+      isPreviousButtonEnabled: false,
 
     }
   },
   mounted() {
-    this.navigateToNextPage(this.currentNumPage);
+    this.navigateToPage(this.currentNumPage);
   },
 
   methods: {
@@ -62,11 +63,14 @@ export default {
     },
 
     goToNextPage() {
-
-      this.navigateToNextPage(this.currentNumPage + 1)
+      this.navigateToPage(this.currentNumPage + 1)
     },
 
-    navigateToNextPage(numPage) {
+    goToPreviousPage() {
+      this.navigateToPage(this.currentNumPage - 1);
+    },
+
+    navigateToPage(numPage) {
       const token = this.getCookie('accessToken');
 
       fetch("http://localhost/api/auth/job-vacancies?numPage=" + numPage, {
@@ -83,9 +87,14 @@ export default {
             this.isNextButtonEnabled = true
           }
 
+          if (this.currentNumPage === 1) {
+            this.isPreviousButtonEnabled = false
+          } else {
+            this.isPreviousButtonEnabled = true
+          }
         })
       })
-    }
+    },
   }
 
 
