@@ -32,12 +32,17 @@
       &nbsp;
       <a :class="{ 'disabled' : !isNextButtonEnabled}" href="#" @click="goToNextPage" class="w3-button">Siguiente
         &raquo;</a>
+    </div>
 
+    <div>
+      <bounce-loader :loading="loading" :color="color" :size="size"></bounce-loader>
     </div>
   </div>
 </template>
 
 <script>
+import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
+
 export default {
   name: "ListJobVacanciesView.vue",
   data: function () {
@@ -46,13 +51,23 @@ export default {
       currentNumPage: 1,
       isNextButtonEnabled: true,
       isPreviousButtonEnabled: false,
-
+      color: '#53b883',
+      color1: '#5bc0de',
+      size: '45px',
+      margin: '2px',
+      radius: '2px',
+      loading: true
     }
   },
-  mounted() {
-    this.navigateToPage(this.currentNumPage);
+  components: {
+    BounceLoader
   },
+  mounted() {
+    console.log('Mounted 1')
 
+    this.navigateToPage(this.currentNumPage);
+    console.log('Mounted 2')
+  },
   methods: {
     getCookie(name) {
       const value = `; ${document.cookie}`;
@@ -63,10 +78,12 @@ export default {
     },
 
     goToNextPage() {
+      this.loading = true
       this.navigateToPage(this.currentNumPage + 1)
     },
 
     goToPreviousPage() {
+      this.loading = true
       this.navigateToPage(this.currentNumPage - 1);
     },
 
@@ -78,6 +95,8 @@ export default {
         headers: {'Authorization': 'Bearer ' + token}
       }).then(res => {
         res.json().then(parsedJson => {
+          this.loading = false
+
           this.jobVacancies = parsedJson;
           this.currentNumPage = parsedJson.numPage;
 
@@ -94,6 +113,8 @@ export default {
           }
         })
       })
+
+
     },
   }
 
