@@ -95,7 +95,6 @@ export default {
         headers: {'Authorization': 'Bearer ' + token}
       }).then(res => {
         res.json().then(parsedJson => {
-          console.log('Promesa devuelva')
           this.loading = false
 
           this.jobVacancies = parsedJson;
