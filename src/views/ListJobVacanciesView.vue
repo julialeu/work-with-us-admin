@@ -11,6 +11,7 @@
           <th>Empresa</th>
           <th>Localidad</th>
           <th>Modalidad</th>
+          <th>Experiencia</th>
           <th>Fecha creación</th>
         </tr>
 
@@ -21,7 +22,11 @@
           <td>{{ item.company }}</td>
           <td>{{ item.location }}</td>
           <td>{{ item.modality }}</td>
+          <td>{{ item.experience }}</td>
           <td>{{ item.created }}</td>
+          <td>
+            <RouterLink :to="{ name: 'edit-job-vacancy', params: { 'uuid': item.uuid }}">Editar</RouterLink>
+          </td>
         </tr>
       </table>
     </div>
@@ -113,11 +118,8 @@ export default {
           }
         })
       })
-
-
     },
   }
-
 
 }
 </script>
