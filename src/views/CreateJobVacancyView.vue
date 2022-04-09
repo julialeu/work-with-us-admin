@@ -6,8 +6,15 @@
     <input v-model="title" type="text" id="title" name="title"><br>
     <label for="description">Descripción:</label>&nbsp
     <input v-model="description" type="text" id="description" name="description"><br>
-    <label for="company">Empresa:</label>&nbsp
-    <input v-model="company" type="text" id="company" name="company"><br>
+
+    <label for="companyId">Empresa:</label>&nbsp
+    <select v-model="companyId" id="companyId" name="companyId">
+      <option disabled value="">Empresa</option>
+      <option v-for="companyItem in companies" v-bind:value="companyItem.id">{{companyItem.name}}</option>
+    </select>
+
+    <br>
+
     <label for="location">Localidad:</label>&nbsp
     <input v-model="location" type="text" id="location" name="location"><br><br>
     <label for="modality">Modalidad:</label>&nbsp
@@ -25,8 +32,8 @@
       <option value="trainee">Prácticas</option>
       <option value="junior">Junior</option>
       <option value="senior">Senior</option>
-    </select><br>
-    <a href="#" @click="submit">Publicar oferta!</a><br>
+    </select><br><br>
+    <a href="#" @click="submit">!Crear oferta!</a><br>
   </form>
 
 </template>
@@ -38,20 +45,35 @@ export default {
     return {
       title: '',
       description: '',
-      company: '',
+      companyId: '',
       location: '',
       modality: '',
       workingTime: '',
-      experience: ''
+      experience: '',
+      companies: [],
     }
   },
+  mounted() {
+    const token = this.getCookie('accessToken');
 
+    fetch("http://localhost/api/user/my-companies", {
+      method: "GET",
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }).then(res => {
+      res.json().then(parsedJson => {
+        this.companies = parsedJson.items
+      })
+    })
+
+  },
   methods : {
     submit: function () {
 
       let data = { title: this.title,
                     description: this.description,
-                    company: this.company,
+                    companyId: this.companyId,
                     location: this.location,
                     modality: this.modality,
                     workingTime: this.workingTime,
@@ -69,9 +91,11 @@ export default {
       }).then(res => {
         res.json().then(parsedJson => {
           this.username = parsedJson.name
+
+          // Redirect the user to job vacancy list
+          this.$router.push('list-job-vacancies');
         })
       })
-      console.log('Submit');
     },
     getCookie(name) {
       const value = `; ${document.cookie}`;

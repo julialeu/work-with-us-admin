@@ -1,10 +1,18 @@
 <template>
 
   <div>
-    <p>Bienvenido {{ username }} </p>&nbsp
+    <p>Hola {{ username }} </p>&nbsp
     <div id="published">
-      <a id="offers">Tus ofertas publicadas</a> &nbsp; <a id="applied">Ofertas a las que te has inscrito</a><br>
-      <RouterLink to="/list-job-vacancies">Tus ofertas creadas</RouterLink>
+      <a id="offers">Tus ofertas publicadas (under construction)</a> &nbsp;
+      <br>
+      <a id="applied">Ofertas a las que te has inscrito (under construction)</a>
+
+      <br>
+      <br>
+
+      <RouterLink to="/list-job-vacancies">Mis posiciones</RouterLink>
+      <br>
+      <RouterLink to="/create-job-vacancy">+ Crear Nueva Oferta</RouterLink>
     </div>
   </div>
 
