@@ -1,10 +1,14 @@
 <template>
   <div>
-    <h1>Mis posiciones (página {{ currentNumPage }})</h1>
+    <h1>
+      <span style="float:left">Mis posiciones (página {{ currentNumPage }})</span>
+
+        <bounce-loader :loading="loading" :color="color" :size="size" style="float:left"></bounce-loader>
+    </h1>
 
     <div class="list">
-      <table>
-        <tr>
+      <table style="min-height: 358px">
+        <tr v-if="jobVacancies.items && jobVacancies.items.length > 0">
           <th>Id</th>
           <th>Título</th>
           <th>Descripción</th>
@@ -12,7 +16,7 @@
           <th>Localidad</th>
           <th>Modalidad</th>
           <th>Experiencia</th>
-          <th>Fecha creación</th>
+          <th>Creado</th>
         </tr>
 
         <tr v-for="item in jobVacancies.items">
@@ -27,6 +31,16 @@
           <td>
             <RouterLink :to="{ name: 'edit-job-vacancy', params: { 'uuid': item.uuid }}">Editar</RouterLink>
           </td>
+
+
+          <td v-if="item.status === 'unpublished'">
+            <a href="" @click="publishJobVacancyButton(item.uuid, $event)">Publicar</a>
+          </td>
+
+          <td v-if="item.status === 'published'">
+            <a href="" @click="unpublishJobVacancyButton(item.uuid, $event)">Despublicar</a>
+          </td>
+
         </tr>
       </table>
     </div>
@@ -39,9 +53,7 @@
         &raquo;</a>
     </div>
 
-    <div>
-      <bounce-loader :loading="loading" :color="color" :size="size"></bounce-loader>
-    </div>
+
   </div>
 </template>
 
@@ -69,7 +81,6 @@ export default {
   },
   mounted() {
     console.log('Mounted 1')
-
     this.navigateToPage(this.currentNumPage);
     console.log('Mounted 2')
   },
@@ -80,6 +91,48 @@ export default {
       if (parts.length === 2) {
         return parts.pop().split(';').shift();
       }
+    },
+
+    publishJobVacancyButton(jobVacancyUuid, e) {
+      // Do not send the form
+      e.preventDefault();
+      this.loading = true
+
+      const token = this.getCookie('accessToken');
+
+      fetch("http://localhost/api/user/mark-job-vacancy-as-published?uuid=" + jobVacancyUuid, {
+        method: "PATCH",
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        res.json().then(parsedJson => {
+          // Refresh current page data
+          this.navigateToPage(this.currentNumPage)
+        })
+      })
+    },
+
+    unpublishJobVacancyButton(jobVacancyUuid, e) {
+      // Do not send the form
+      e.preventDefault();
+      this.loading = true
+
+      const token = this.getCookie('accessToken');
+
+      fetch("http://localhost/api/user/mark-job-vacancy-as-unpublished?uuid=" + jobVacancyUuid, {
+        method: "PATCH",
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        res.json().then(parsedJson => {
+          // Refresh current page data
+          this.navigateToPage(this.currentNumPage)
+        })
+      })
     },
 
     goToNextPage() {
