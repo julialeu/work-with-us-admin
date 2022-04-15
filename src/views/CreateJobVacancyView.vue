@@ -25,7 +25,11 @@
       <option value="hybrid">Híbrido</option>
     </select><br>
     <label for="workingTime">Tipo de jornada:</label>&nbsp
-    <input v-model="workingTime" type="text" id="workingTime" name="workingTime"><br>
+    <select v-model="workingTime" name="workingTime" id="workingTime">
+      <option value="">Selecciona una opción...</option>
+      <option value="full_time">Jornada Completa</option>
+      <option value="part_time">Media Jornada</option>
+    </select><br>
     <label for="experience">Experiencia:</label>&nbsp
     <select v-model="experience" name="experience" id="experience">
       <option value="">Selecciona una opción...</option>

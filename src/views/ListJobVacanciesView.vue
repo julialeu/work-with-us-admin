@@ -3,7 +3,7 @@
     <h1>
       <span style="float:left">Mis posiciones (página {{ currentNumPage }})</span>
 
-        <bounce-loader :loading="loading" :color="color" :size="size" style="float:left"></bounce-loader>
+      <bounce-loader :loading="loading" :color="color" :size="size" style="float:left"></bounce-loader>
     </h1>
 
     <div class="list">
@@ -11,10 +11,10 @@
         <tr v-if="jobVacancies.items && jobVacancies.items.length > 0">
           <th>Id</th>
           <th>Título</th>
-          <th>Descripción</th>
           <th>Empresa</th>
           <th>Localidad</th>
           <th>Modalidad</th>
+          <th>Tipo de jornada</th>
           <th>Experiencia</th>
           <th>Creado</th>
         </tr>
@@ -22,10 +22,27 @@
         <tr v-for="item in jobVacancies.items">
           <td>{{ item.id }}</td>
           <td>{{ item.title }}</td>
-          <td>{{ item.description }}</td>
           <td>{{ item.company }}</td>
           <td>{{ item.location }}</td>
-          <td>{{ item.modality }}</td>
+          <td>
+            <span v-if="item.modality === 'on_site'">
+              Presencial
+            </span>
+            <span v-else-if="item.modality === 'hybrid'">
+              Híbrido
+            </span>
+            <span v-else="item.modality === 'remote'">
+              Remoto
+            </span>
+          </td>
+          <td>
+            <span v-if="item.working_time === 'full_time'">
+              Jornada Completa
+            </span>
+            <span v-else>
+              Media jornada
+            </span>
+          </td>
           <td>{{ item.experience }}</td>
           <td>{{ item.created }}</td>
           <td>

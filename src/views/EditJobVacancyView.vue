@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Hola</h1>
+    <h1>Editar oferta</h1>
 
 
     <form>
@@ -18,6 +18,9 @@
 
       <label for="modality">Modalidad:</label><br>
       <input type="text" id="modality" name="modality" v-model="form.modality"><br>
+
+      <label for="workingTime">Tipo de jornada:</label><br>
+      <input type="text" id="workingTime" name="workingTime" v-model="form.workingTime"><br>
 
       <label for="experience">Experience:</label><br>
       <input type="text" id="experience" name="experience" v-model="form.experience"><br>
@@ -48,6 +51,7 @@ export default {
         company: '',
         location: '',
         modality: '',
+        workingTime: ''
       },
       color: '#53b883',
       color1: '#5bc0de',
@@ -86,6 +90,7 @@ export default {
         this.form.company = parsedJson.company
         this.form.location = parsedJson.location
         this.form.modality = parsedJson.modality
+        this.form.workingTime = parsedJson.workingTime
         this.form.experience = parsedJson.experience
       })
     })
@@ -121,6 +126,9 @@ export default {
       }
       if (this.originalJobVacancy.modality !== this.form.modality) {
         bodyData.modality = this.form.modality
+      }
+      if (this.originalJobVacancy.workingTime !== this.form.workingTime) {
+        bodyData.workingTime = this.form.workingTime
       }
       if (this.originalJobVacancy.experience !== this.form.experience) {
         bodyData.experience = this.form.experience
