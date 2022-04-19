@@ -5,14 +5,14 @@
     <div id="published">
       <a id="offers">Tus ofertas publicadas (under construction)</a> &nbsp;
       <br>
-      <a id="applied">Ofertas a las que te has inscrito (under construction)</a>
-
-      <br>
       <br>
 
       <RouterLink to="/list-job-vacancies">Mis posiciones</RouterLink>
       <br>
       <RouterLink to="/create-job-vacancy">+ Crear Nueva Oferta</RouterLink>
+      <br>
+      <br>
+      <a v-on:click="logout" href="#">Logout</a>
 
       <br>
       <br>
@@ -51,6 +51,15 @@ export default {
       if (parts.length === 2) {
         return parts.pop().split(';').shift();
       }
+    },
+    logout() {
+      console.log('Logout');
+      this.deleteCookie('accessToken');
+      this.$router.push({name: 'login'})
+
+    },
+    deleteCookie(name) {
+      document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
   }
 }

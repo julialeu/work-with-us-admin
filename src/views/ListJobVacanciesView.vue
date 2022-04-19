@@ -22,7 +22,7 @@
         <tr v-for="item in jobVacancies.items">
           <td>{{ item.id }}</td>
           <td>{{ item.title }}</td>
-          <td>{{ item.company }}</td>
+          <td>{{ item.company_name }}</td>
           <td>{{ item.location }}</td>
           <td>
             <span v-if="item.modality === 'on_site'">
