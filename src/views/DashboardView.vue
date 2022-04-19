@@ -13,6 +13,11 @@
       <RouterLink to="/list-job-vacancies">Mis posiciones</RouterLink>
       <br>
       <RouterLink to="/create-job-vacancy">+ Crear Nueva Oferta</RouterLink>
+
+      <br>
+      <br>
+
+      <RouterLink to="/my-companies">Mis empresas</RouterLink>
     </div>
   </div>
 

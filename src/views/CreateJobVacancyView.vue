@@ -1,6 +1,5 @@
 <template>
 
-  <p>Bienvenido</p>&nbsp
   <form>
     <label for="title">Título:</label>&nbsp
     <input v-model="title" type="text" id="title" name="title"><br>
