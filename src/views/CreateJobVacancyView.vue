@@ -9,7 +9,7 @@
     <label for="companyId">Empresa:</label>&nbsp
     <select v-model="companyId" id="companyId" name="companyId">
       <option disabled value="">Empresa</option>
-      <option v-for="companyItem in companies" v-bind:value="companyItem.id">{{companyItem.name}}</option>
+      <option v-for="companyItem in companies" v-bind:value="companyItem.id">{{ companyItem.name }}</option>
     </select>
 
     <br>
@@ -71,16 +71,23 @@ export default {
     })
 
   },
-  methods : {
+  methods: {
     submit: function () {
 
-      let data = { title: this.title,
-                    description: this.description,
-                    companyId: this.companyId,
-                    location: this.location,
-                    modality: this.modality,
-                    workingTime: this.workingTime,
-                    experience: this.experience};
+      if (this.isFormIncomplete()) {
+        alert('Rellena todos los campos obligatorios.')
+        return
+      }
+
+      let data = {
+        title: this.title,
+        description: this.description,
+        companyId: this.companyId,
+        location: this.location,
+        modality: this.modality,
+        workingTime: this.workingTime,
+        experience: this.experience
+      };
 
       const token = this.getCookie('accessToken');
 
@@ -106,6 +113,21 @@ export default {
       if (parts.length === 2) {
         return parts.pop().split(';').shift();
       }
+    },
+
+    isFormIncomplete() {
+
+      if (this.title === ''
+          || this.description === ''
+          || this.companyId === ''
+          || this.location === ''
+          || this.modality === ''
+          || this.workingTime === ''
+          || this.experience === ''
+      ) {
+        return true
+      }
+      return false
     }
   }
 }
