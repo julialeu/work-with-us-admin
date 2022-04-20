@@ -24,11 +24,14 @@
 </template>
 
 <script>
+import { store } from './../store.js'
+
 export default {
   name: "DashboardView.vue",
   data: function () {
     return {
-      username: ''
+      username: '',
+      store
     }
   },
   mounted() {
@@ -56,6 +59,8 @@ export default {
       console.log('Logout');
       this.deleteCookie('accessToken');
       this.$router.push({name: 'login'})
+      this.store.isLoggedIn = false
+
 
     },
     deleteCookie(name) {
