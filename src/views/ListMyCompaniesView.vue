@@ -28,12 +28,12 @@
           <td>
             <RouterLink :to="{ path: 'edit-company', query: { 'companyId': item.id }}">Editar</RouterLink>
           </td>
+          <td>
+              <a href="" @click="goToCompany(item.slug, $event)">Ver más</a>
+          </td>
         </tr>
       </table>
     </div>
-
-
-
 
   </div>
 </template>
@@ -61,6 +61,19 @@ export default {
     this.showCompanies();
   },
   methods: {
+    goToCompany(companySlug, e) {
+      e.preventDefault();
+
+      console.log('companySlug', companySlug)
+      console.log('env', import.meta.env.VITE_FULL_DOMAIN)
+
+      const url = import.meta.env.VITE_FULL_DOMAIN + '/' + companySlug
+      console.log(url)
+
+      window.location.href = url;
+
+
+    },
     getCookie(name) {
       const value = `; ${document.cookie}`;
       const parts = value.split(`; ${name}=`);
@@ -81,7 +94,7 @@ export default {
           this.companies = parsedJson
         })
       })
-    },
+    }
   }
 
 }
