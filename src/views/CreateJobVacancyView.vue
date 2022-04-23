@@ -1,10 +1,13 @@
 <template>
 
   <form>
+
+
     <label for="title">Título:</label>&nbsp
     <input v-model="title" type="text" id="title" name="title"><br>
     <label for="description">Descripción:</label>&nbsp
-    <input v-model="description" type="text" id="description" name="description"><br>
+    <RichTextEditor v-model:content="xxx" contentType="html" theme="snow" toolbar="essential"/>
+
 
     <label for="companyId">Empresa:</label>&nbsp
     <select v-model="companyId" id="companyId" name="companyId">
@@ -42,12 +45,17 @@
 </template>
 
 <script>
+import RichTextEditor from '../components/RichTextEditor.vue'
+
 export default {
   name: "CreateJobVacancyView.vue",
+  components: {
+    RichTextEditor
+  },
   data: function () {
     return {
       title: '',
-      description: '',
+      xxx: '<span>foooo</span>',
       companyId: '',
       location: '',
       modality: '',
