@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="form">
   <form>
     <label for="name">Nombre</label>&nbsp
     <input v-model="name" type="email" id="name" name="name" placeholder="Nombre...">
@@ -9,9 +9,9 @@
     <br><br>
     <label for="password">Password</label>&nbsp
     <input v-model="password" type="password" id="password" name="password" placeholder="Password..."><br><br>
-    <label for="company">Empresa</label>&nbsp
-    <input v-model="company" type="text" id="company" name="company" placeholder="Empresa..."><br><br>
-    <a href="#" @click="submit">Resgistrarme!</a><br>
+    <div class="actionButton">
+      <a href="#" @click="submit" class="buttonForm">Resgistrarme!</a><br>
+    </div>
 
   </form>
 </div>

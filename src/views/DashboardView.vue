@@ -3,21 +3,16 @@
   <div>
     <p>Hola {{ username }} </p>&nbsp
     <div id="published">
-      <a id="offers">Tus ofertas publicadas (under construction)</a> &nbsp;
+      <br>
+
+      <RouterLink to="/list-job-vacancies" class="button">Ofertas de empleo</RouterLink>
+      <br>
+      <RouterLink to="/create-job-vacancy" class="button">+ Crear Nueva Oferta</RouterLink>
+      <br>
       <br>
       <br>
 
-      <RouterLink to="/list-job-vacancies">Mis posiciones</RouterLink>
-      <br>
-      <RouterLink to="/create-job-vacancy">+ Crear Nueva Oferta</RouterLink>
-      <br>
-      <br>
-      <a v-on:click="logout" href="#">Logout</a>
-
-      <br>
-      <br>
-
-      <RouterLink to="/my-companies">Mis empresas</RouterLink>
+      <RouterLink to="/my-companies" class="button">Mis empresas</RouterLink>
     </div>
   </div>
 
@@ -25,9 +20,11 @@
 
 <script>
 import { store } from './../store.js'
+import { getCookieService } from './../services/GetCookie.js'
 
 export default {
   name: "DashboardView.vue",
+  mixins: [getCookieService],
   data: function () {
     return {
       username: '',
@@ -47,26 +44,6 @@ export default {
     })
 
   },
-  methods: {
-    getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) {
-        return parts.pop().split(';').shift();
-      }
-    },
-    logout() {
-      console.log('Logout');
-      this.deleteCookie('accessToken');
-      this.$router.push({name: 'login'})
-      this.store.isLoggedIn = false
-
-
-    },
-    deleteCookie(name) {
-      document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
-  }
 }
 </script>
 

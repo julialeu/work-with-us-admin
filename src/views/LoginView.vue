@@ -1,13 +1,16 @@
 <template>
-<div>
+<div class="form">
   <form>
     <label for="email">Email</label>&nbsp
     <input v-model="email" type="email" id="email" name="email" placeholder="Email...">
     <br><br>
     <label for="password">Password</label>&nbsp
     <input v-model="password" type="password" id="password" name="password" placeholder="Password..."><br>
-    <a href="#" @click="submit">Login</a><br>
-    <RouterLink to="/register">¿No tienes usuario? Regístrate!</RouterLink>
+    <div class="actionButton">
+      <a href="#" @click="submit" class="buttonForm">Login</a><br><br>
+    </div>
+    <br>
+    <RouterLink to="/register" class="button" style="margin: 100px">¿No tienes usuario? Regístrate!</RouterLink>
     <bounce-loader :loading="loading" :color="color" :size="size" style="float:left"></bounce-loader>
 
   </form>
@@ -58,11 +61,13 @@ export default {
           document.cookie = "accessToken=" + accessToken;
 
           // Update storage isLoggedIn value, so "Dashboard" link is shown
+
           this.store.isLoggedIn = true
 
           this.$router.push('dashboard');
         })
       });
+
 
       console.log('Submit...');
     }

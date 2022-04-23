@@ -1,38 +1,40 @@
 <template>
   <div>
     <h1 style="display: block">
-      <span style="float:left">Mis empresas</span>
+      <span>Mis empresas</span>
 
-      <bounce-loader :loading="loading" :color="color" :size="size" style="float:left"></bounce-loader>
+      <bounce-loader :loading="loading" :color="color" :size="size"></bounce-loader>
     </h1>
 
     <br>
 
-    <div>
-      <RouterLink to="/create-company">+ Crear Nueva Empresa</RouterLink>
-    </div>
+
 
 
     <div class="list">
       <table>
         <tr v-if="companies.items && companies.items.length > 0">
-          <th>Id</th>
           <th>Nombre</th>
           <th>Creado</th>
         </tr>
 
         <tr v-for="item in companies.items">
-          <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
           <td>{{ item.created_at }}</td>
           <td>
-            <RouterLink :to="{ path: 'edit-company', query: { 'companyId': item.id }}">Editar</RouterLink>
+            <RouterLink :to="{ path: 'edit-company', query: { 'companyId': item.id }}" class="button">Editar</RouterLink>
           </td>
           <td>
-              <a href="" @click="goToCompany(item.slug, $event)">Ver más</a>
+              <a href="" @click="goToCompany(item.slug, $event)" class="button">Ver más</a>
           </td>
         </tr>
       </table>
+      <br>
+      <br>
+    </div>
+
+    <div>
+      <RouterLink to="/create-company" class="button">+ Crear Nueva Empresa</RouterLink>
     </div>
 
   </div>
@@ -40,9 +42,11 @@
 
 <script>
 import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
+import { getCookieService } from './../services/GetCookie.js'
 
 export default {
   name: "ListMyCompaniesView.vue",
+  mixins: [getCookieService],
   data: function () {
     return {
       companies: [],
@@ -74,14 +78,6 @@ export default {
 
 
     },
-    getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) {
-        return parts.pop().split(';').shift();
-      }
-    },
-
     showCompanies() {
       const token = this.getCookie('accessToken');
 
