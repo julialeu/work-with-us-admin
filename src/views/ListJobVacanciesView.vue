@@ -1,84 +1,73 @@
 <template>
   <div>
     <h1>
-      <span style="float:left">Mis posiciones (página {{ currentNumPage }})</span>
+      <span>Ofertas de empleo (página {{ currentNumPage }})</span>
 
-      <bounce-loader :loading="loading" :color="color" :size="size" style="float:left"></bounce-loader>
+      <bounce-loader :loading="loading" :color="color" :size="size"></bounce-loader>
     </h1>
 
     <div class="list">
       <table style="min-height: 358px">
         <tr v-if="jobVacancies.items && jobVacancies.items.length > 0">
-          <th>Id</th>
+          <th>Estado</th>
           <th>Título</th>
           <th>Empresa</th>
           <th>Localidad</th>
-          <th>Modalidad</th>
           <th>Tipo de jornada</th>
-          <th>Experiencia</th>
           <th>Creado</th>
         </tr>
 
         <tr v-for="item in jobVacancies.items">
-          <td>{{ item.id }}</td>
+          <td>
+            <span v-if="item.status === 'unpublished'" class="inactive">Despublicada</span>
+            <span v-if="item.status === 'published'" class="active">Publicada</span>
+          </td>
           <td>{{ item.title }}</td>
           <td>{{ item.company_name }}</td>
           <td>{{ item.location }}</td>
           <td>
-            <span v-if="item.modality === 'on_site'">
-              Presencial
-            </span>
-            <span v-else-if="item.modality === 'hybrid'">
-              Híbrido
-            </span>
-            <span v-else="item.modality === 'remote'">
-              Remoto
-            </span>
-          </td>
-          <td>
             <span v-if="item.working_time === 'full_time'">
-              Jornada Completa
+               Completa
             </span>
             <span v-else>
-              Media jornada
+              Media
             </span>
           </td>
-          <td>{{ item.experience }}</td>
           <td>{{ item.created }}</td>
           <td>
-            <RouterLink :to="{ name: 'edit-job-vacancy', params: { 'uuid': item.uuid }}">Editar</RouterLink>
+            <RouterLink :to="{ name: 'edit-job-vacancy', params: { 'uuid': item.uuid }} " class="button">Editar</RouterLink>
           </td>
 
-
           <td v-if="item.status === 'unpublished'">
-            <a href="" @click="publishJobVacancyButton(item.uuid, $event)">Publicar</a>
+            <a href="" @click="publishJobVacancyButton(item.uuid, $event)" class="button">Publicar</a>
           </td>
 
           <td v-if="item.status === 'published'">
-            <a href="" @click="unpublishJobVacancyButton(item.uuid, $event)">Despublicar</a>
+            <a href="" @click="unpublishJobVacancyButton(item.uuid, $event)" class="button">Despublicar</a>
           </td>
 
         </tr>
       </table>
-    </div>
 
-    <div class="pagination">
-      <a :class="{ 'disabled' : !isPreviousButtonEnabled}" href="#" @click="goToPreviousPage" class="w3-button">&laquo;
-        Anterior</a>
-      &nbsp;
-      <a :class="{ 'disabled' : !isNextButtonEnabled}" href="#" @click="goToNextPage" class="w3-button">Siguiente
-        &raquo;</a>
+      <div class="pagination" v-if="jobVacancies.items && jobVacancies.items.length > 0">
+        <a :class="{ 'disabled' : !isPreviousButtonEnabled}" href="#" @click="goToPreviousPage" class="button">&laquo;
+          Anterior</a>
+        &nbsp;
+        <a :class="{ 'disabled' : !isNextButtonEnabled}" href="#" @click="goToNextPage" class="button">Siguiente
+          &raquo;</a>
+      </div>
     </div>
-
 
   </div>
 </template>
 
 <script>
 import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
+import { getCookieService } from './../services/GetCookie.js'
 
 export default {
   name: "ListJobVacanciesView.vue",
+  mixins: [getCookieService],
   data: function () {
     return {
       jobVacancies: [],
@@ -102,14 +91,6 @@ export default {
     console.log('Mounted 2')
   },
   methods: {
-    getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) {
-        return parts.pop().split(';').shift();
-      }
-    },
-
     publishJobVacancyButton(jobVacancyUuid, e) {
       // Do not send the form
       e.preventDefault();

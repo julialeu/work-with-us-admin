@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+.header {
+    padding: 60px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    text-decoration: unset;
+    margin-bottom: 30px;
+
+}
+
+.header a {
+    text-decoration: unset;
+    margin: 18px;
+    font-size: 1.5em;
+    color: white;
+}
+
+.header a:active {
+
+    color: papayawhip;
+
+}
+
+.main {
+    margin-left: 50px;
+}
+
+.list th, .button {
+    font-weight: bold;
+    color: #1abc9c;
+    text-decoration: unset;
+}
+
+td {
+    padding: 5px;
+}
+
+.active {
+    color: white;
+    background-color: #e54363;
+    opacity: 100%;
+    border-radius: 5px;
+    padding: 7px;
+}
+
+.inactive {
+    color: white;
+    background-color: #c3c3c3;
+    opacity: 80%;
+    border-radius: 5px;
+    padding: 7px;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.form {
+    max-width: 500px;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    margin: 10px auto;
+    padding: 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+}
+
+.form fieldset{
+    border: none;
+}
+
+.form label{
+    margin-bottom: 8px;
+}
+
+.form select {
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    margin: 0;
+    outline: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #e8eeef;
+    color:#8a97a0;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    margin-bottom: 30px
+}
+
+.form input, textarea {
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 4%;
+    border: 1px solid #ccc;
+    padding: 3%;
+    color: #555;
+}
+
+.buttonForm {
+    background-color: #1abc9c; /* Green */
+    border-radius: 10px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.actionButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
