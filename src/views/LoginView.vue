@@ -10,7 +10,9 @@
       <a href="#" @click="submit" class="buttonForm">Login</a><br><br>
     </div>
     <br>
-    <RouterLink to="/register" class="button" style="margin: 100px">¿No tienes usuario? Regístrate!</RouterLink>
+    <div class="center-text">
+      <RouterLink to="/register" class="button">¿No tienes usuario? Regístrate!</RouterLink>
+    </div>
     <bounce-loader :loading="loading" :color="color" :size="size" style="float:left"></bounce-loader>
 
   </form>
