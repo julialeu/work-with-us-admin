@@ -10,7 +10,6 @@ import MenuLinks from "@/components/MenuLinks.vue";
     <div class="wrapper">
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
         <MenuLinks/>
 
       </nav>

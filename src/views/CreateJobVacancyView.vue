@@ -98,7 +98,7 @@ export default {
 
       const token = this.getCookie('accessToken');
 
-      fetch("http://localhost/api/auth/job-vacancy", {
+      fetch("http://localhost/api/user/job-vacancy", {
         method: "POST",
         headers: {
           'Authorization': 'Bearer ' + token,

@@ -146,7 +146,7 @@ export default {
     navigateToPage(numPage) {
       const token = this.getCookie('accessToken');
 
-      fetch("http://localhost/api/auth/job-vacancies?numPage=" + numPage, {
+      fetch("http://localhost/api/user/job-vacancies?numPage=" + numPage, {
         method: "GET",
         headers: {'Authorization': 'Bearer ' + token}
       }).then(res => {

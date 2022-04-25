@@ -34,7 +34,7 @@ export default {
   mounted() {
     const token = this.getCookie('accessToken');
 
-    fetch("http://localhost/api/auth/profile", {
+    fetch("http://localhost/api/user/profile", {
       method: "GET",
       headers: {'Authorization': 'Bearer ' + token}
     }).then(res => {

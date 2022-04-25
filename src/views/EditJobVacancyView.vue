@@ -37,10 +37,13 @@
 
 <script>
 import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
+import { getCookieService } from './../services/GetCookie.js'
 
 
 export default {
   name: "EditJobVacancyView.vue",
+  mixins: [getCookieService],
+
   data: function () {
     return {
       uuid: '',
@@ -71,7 +74,7 @@ export default {
     console.log('Mounted 2')
 
     const uuid = this.$route.params.uuid
-    fetch("http://localhost/api/auth/job-vacancy?uuid=" + uuid, {
+    fetch("http://localhost/api/user/job-vacancy?uuid=" + uuid, {
       method: "GET",
       headers: {
         'Authorization': 'Bearer ' + token
@@ -97,13 +100,6 @@ export default {
   },
 
   methods: {
-    getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) {
-        return parts.pop().split(';').shift();
-      }
-    },
     editJobVacancy(e) {
       // Do not send the form
       e.preventDefault();
@@ -136,7 +132,7 @@ export default {
 
       const token = this.getCookie('accessToken');
       const uuid = this.$route.params.uuid
-      fetch("http://localhost/api/auth/job-vacancy?uuid=" + uuid, {
+      fetch("http://localhost/api/user/job-vacancy?uuid=" + uuid, {
         method: "PATCH",
         headers: {
           'Authorization': 'Bearer ' + token,
