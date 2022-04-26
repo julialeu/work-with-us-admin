@@ -1,27 +1,27 @@
 <template>
-<div class="form">
-  <form>
-    <label for="email">Email</label>&nbsp
-    <input v-model="email" type="email" id="email" name="email" placeholder="Email...">
-    <br><br>
-    <label for="password">Password</label>&nbsp
-    <input v-model="password" type="password" id="password" name="password" placeholder="Password..."><br>
-    <div class="actionButton">
-      <a href="#" @click="submit" class="buttonForm">Login</a><br><br>
-    </div>
-    <br>
-    <div class="center-text">
-      <RouterLink to="/register" class="button">¿No tienes usuario? Regístrate!</RouterLink>
-    </div>
-    <bounce-loader :loading="loading" :color="color" :size="size" style="float:left"></bounce-loader>
+  <div class="form">
+    <form>
+      <label for="email">Email</label>&nbsp
+      <input v-model="email" type="email" id="email" name="email" placeholder="Email...">
+      <br><br>
+      <label for="password">Password</label>&nbsp
+      <input v-model="password" type="password" id="password" name="password" placeholder="Password..."><br>
+      <div class="actionButton">
+        <a href="#" @click="submit" class="buttonForm">Login</a><br><br>
+      </div>
+      <br>
+      <div class="center-text">
+        <RouterLink to="/register" class="button">¿No tienes usuario? Regístrate!</RouterLink>
+      </div>
+      <bounce-loader :loading="loading" :color="color" :size="size" style="float:left"></bounce-loader>
 
-  </form>
-</div>
+    </form>
+  </div>
 </template>
 
 <script>
 import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
-import { store } from './../store.js'
+import {store} from './../store.js'
 
 export default {
   name: "LoginView.vue",
@@ -41,7 +41,7 @@ export default {
   components: {
     BounceLoader
   },
-  methods : {
+  methods: {
     submit: function () {
       this.loading = true
 
@@ -56,25 +56,38 @@ export default {
         body: JSON.stringify(data)
       }).then(res => {
 
-        res.json().then(parsedJson => {
-          this.loading = false
+            let responseStatus = res.status;
+            console.log('responseStatus', responseStatus)
+            console.log(res)
 
-          const accessToken = parsedJson['access_token'];
-          document.cookie = "accessToken=" + accessToken;
+            if (responseStatus === 401) {
+              res.json().then(parsedJson => {
+                console.log('parsedJson', parsedJson)
+                let errorMessage = parsedJson['error'];
+                this.loading = false
+                alert('Credenciales incorrectas')
 
-          // Update storage isLoggedIn value, so "Dashboard" link is shown
+              })
+            } else {
+              res.json().then(parsedJson => {
+                console.log('parsedJson', parsedJson)
+                this.loading = false
 
-          this.store.isLoggedIn = true
+                const accessToken = parsedJson['access_token'];
+                document.cookie = "accessToken=" + accessToken;
 
-          this.$router.push('dashboard');
-        })
-      });
+                // Update storage isLoggedIn value, so "Dashboard" link is shown
 
+                this.store.isLoggedIn = true
 
-      console.log('Submit...');
+                this.$router.push('dashboard');
+              })
+            }
+          });
+        console.log('Submit...');
+      }
     }
   }
-}
 </script>
 
 <style scoped>
