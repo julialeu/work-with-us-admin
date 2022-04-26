@@ -24,8 +24,7 @@ export default {
     return {
       name: "",
       email: "",
-      password: "",
-      company:""
+      password: ""
     }
   },
 
@@ -35,25 +34,35 @@ export default {
 
       let data = {name: this.name,
                   email: this.email,
-                  password: this.password,
-                  company: this.company};
+                  password: this.password};
 
       fetch("http://localhost/api/auth/register", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
       }).then(res => {
-        res.json().then(parsedJson => {
-          console.log('parsedJson', parsedJson)
-          const accessToken = parsedJson['access_token'];
-          console.log('access_token', accessToken)
+        let responseStatus = res.status;
+        console.log('responseStatus', responseStatus)
+        console.log(res)
 
-          document.cookie = "accessToken=" + accessToken;
+        if (responseStatus === 400) {
+          res.json().then(parsedJson => {
+            console.log('parsedJson', parsedJson)
+            let errorMessage = parsedJson['errorMessage'];
+            alert(errorMessage)
+          })
+        } else {
+          res.json().then(parsedJson => {
+            console.log('parsedJson', parsedJson)
+            const accessToken = parsedJson['access_token'];
+            console.log('access_token', accessToken)
 
-          this.$router.push('dashboard');
-        })
+            document.cookie = "accessToken=" + accessToken;
+
+            this.$router.push('dashboard');
+          })
+        }
       });
-
       console.log('Register...');
     }
   }
