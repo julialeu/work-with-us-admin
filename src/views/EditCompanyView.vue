@@ -50,7 +50,6 @@ export default {
     const token = this.getCookie('accessToken');
 
     const companyId = this.$route.query.companyId
-    console.log('company_id: ' + companyId);
     fetch("http://localhost/api/user/company?companyId=" + companyId, {
       method: "GET",
       headers: {

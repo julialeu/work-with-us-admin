@@ -65,11 +65,7 @@ export default {
     goToCompany(companySlug, e) {
       e.preventDefault();
 
-      console.log('companySlug', companySlug)
-      console.log('env', import.meta.env.VITE_FULL_DOMAIN)
-
       const url = import.meta.env.VITE_FULL_DOMAIN + '/' + companySlug
-      console.log(url)
 
       window.location.href = url;
     },
@@ -92,5 +88,10 @@ export default {
 </script>
 
 <style scoped>
+
+.list table {
+  border-collapse:separate;
+  border-spacing:1em;
+}
 
 </style>

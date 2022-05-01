@@ -57,12 +57,9 @@ export default {
       }).then(res => {
 
             let responseStatus = res.status;
-            console.log('responseStatus', responseStatus)
-            console.log(res)
 
             if (responseStatus === 401) {
               res.json().then(parsedJson => {
-                console.log('parsedJson', parsedJson)
                 let errorMessage = parsedJson['error'];
                 this.loading = false
                 alert('Credenciales incorrectas')
@@ -70,7 +67,6 @@ export default {
               })
             } else {
               res.json().then(parsedJson => {
-                console.log('parsedJson', parsedJson)
                 this.loading = false
 
                 const accessToken = parsedJson['access_token'];
