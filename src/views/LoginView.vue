@@ -21,7 +21,7 @@
 
 <script>
 import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
-import {store} from './../store.js'
+import { store } from './../store.js'
 
 export default {
   name: "LoginView.vue",
@@ -73,10 +73,9 @@ export default {
                 document.cookie = "accessToken=" + accessToken;
 
                 // Update storage isLoggedIn value, so "Dashboard" link is shown
-
                 this.store.isLoggedIn = true
 
-                this.$router.push('dashboard');
+                this.$router.push('home');
               })
             }
           });

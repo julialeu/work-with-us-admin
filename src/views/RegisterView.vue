@@ -18,13 +18,16 @@
 </template>
 
 <script>
+import { store } from './../store.js'
+
 export default {
   name: "RegisterView.vue",
   data: function () {
     return {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      store
     }
   },
 
@@ -54,7 +57,9 @@ export default {
 
             document.cookie = "accessToken=" + accessToken;
 
-            this.$router.push('dashboard');
+            this.store.isLoggedIn = true
+
+            this.$router.push('create-company');
           })
         }
       });

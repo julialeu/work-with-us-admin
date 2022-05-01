@@ -55,7 +55,7 @@
         <br><br>
 
         <div class="actionButton">
-          <a href="#" @click="submit" class="buttonForm">!Crear oferta!</a><br>
+          <a href="#" @click="submit" class="buttonForm">Crear oferta</a><br>
         </div>
       </form>
     </fieldset>

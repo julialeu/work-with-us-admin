@@ -89,7 +89,7 @@ export default {
     this.pellEditor = pell.init({
       element: document.getElementById('pell'),
       onChange: html => {
-        this.description = html
+        this.form.description = html
       },
       actions: [
         'bold',
@@ -194,5 +194,16 @@ export default {
 </script>
 
 <style scoped>
+
+.pell {
+  border: 2px solid #000;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#pell-html-output {
+  margin: 0;
+  white-space: pre-wrap;
+}
 
 </style>

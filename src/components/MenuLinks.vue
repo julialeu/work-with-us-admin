@@ -1,9 +1,9 @@
 <template>
   <span class="dashboard-link">
 
-      <RouterLink to="/list-job-vacancies" class="button">Ofertas de empleo</RouterLink>
-      <RouterLink to="/create-job-vacancy" class="button">+ Crear Nueva Oferta</RouterLink>
-      <RouterLink to="/my-companies" class="button">Mis empresas</RouterLink>
+      <RouterLink v-if="store.isLoggedIn" to="/list-job-vacancies" class="button">Ofertas de empleo</RouterLink>
+      <RouterLink v-if="store.isLoggedIn" to="/create-job-vacancy" class="button">Crear Nueva Oferta</RouterLink>
+      <RouterLink v-if="store.isLoggedIn" to="/my-companies" class="button">Mis empresas</RouterLink>
 
 
 

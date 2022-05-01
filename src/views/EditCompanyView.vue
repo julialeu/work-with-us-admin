@@ -6,8 +6,14 @@
       <label for="name">* Nombre:</label><br>
       <input type="text" readonly disabled id="name" name="name" v-model="form.name"><br>
 
-      <label for="description">* Descripción:</label><br>
-      <textarea type="text" id="description" name="description" v-model="form.description"></textarea><br>
+<!--      <label for="description">* Descripción:</label><br>-->
+<!--      <textarea type="text" id="description" name="description" v-model="form.description"></textarea><br>-->
+
+      <div>
+        <label>Descripción</label>&nbsp
+        <div id="pell" class="pell"/>
+      </div>
+
 
       <br>
       <input @click="edit" type="submit" value="Submit">
@@ -22,6 +28,8 @@
 <script>
 import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
 import { getCookieService } from './../services/GetCookie.js'
+import pell from 'pell'
+
 
 export default {
   name: "EditCompanyView.vue",
@@ -47,6 +55,42 @@ export default {
   },
 
   mounted() {
+
+    this.pellEditor = pell.init({
+      element: document.getElementById('pell'),
+      onChange: html => {
+        this.form.description = html
+      },
+      actions: [
+        'bold',
+        'italic',
+        'underline',
+        'strikethrough',
+        'heading1',
+        'heading2',
+        'paragraph',
+        'quote',
+        'olist',
+        'ulist',
+        'code',
+        'line',
+        {
+          name: 'image',
+          result: () => {
+            const url = window.prompt('Enter the image URL')
+            if (url) pell.exec('insertImage', this.ensureHTTP(url))
+          }
+        },
+        {
+          name: 'link',
+          result: () => {
+            const url = window.prompt('Enter the link URL')
+            if (url) pell.exec('createLink', this.ensureHTTP(url))
+          }
+        }
+      ]
+    })
+
     const token = this.getCookie('accessToken');
 
     const companyId = this.$route.query.companyId
@@ -64,6 +108,10 @@ export default {
 
         this.form.name = parsedJson.name
         this.form.description = parsedJson.description
+
+        this.pellEditor.content.innerHTML = parsedJson.description
+
+
       })
     })
   },
@@ -108,5 +156,16 @@ export default {
 </script>
 
 <style scoped>
+
+.pell {
+  border: 2px solid #000;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#pell-html-output {
+  margin: 0;
+  white-space: pre-wrap;
+}
 
 </style>

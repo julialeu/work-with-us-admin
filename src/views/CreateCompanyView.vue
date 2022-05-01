@@ -1,23 +1,31 @@
 <template>
 
-  <div>
-    <form>
+  <div class="form">
 
-      <label for="name">* Nombre:</label>&nbsp
-      <input v-model="name" type="text" id="name" name="name"><br>
+    <fieldset>
+      <h1>Crear empresa</h1>
+      <form>
+        <label for="name">Nombre:</label>&nbsp
+        <input v-model="name" type="text" id="name" name="name"><br>
 
-      <label for="description">* Descripción:</label>&nbsp
-      <input v-model="description" type="text" id="description" name="description"><br>
+        <div>
+          <label>Descripción</label>&nbsp
+          <div id="pell" class="pell"/>
+        </div>
 
-      <br>
+        <br>
+        <div class="actionButton">
+          <a href="#" @click="submit" class="buttonForm">Crear Empresa</a><br>
+        </div>
+      </form>
+    </fieldset>
 
-      <a href="#" @click="submit">!Crear Empresa!</a><br>
-    </form>
   </div>
 </template>
 
 <script>
 import { getCookieService } from './../services/GetCookie.js'
+import pell from 'pell'
 
 export default {
   name: "CreateCompanyView.vue",
@@ -28,6 +36,45 @@ export default {
       name: '',
       description: ''
     }
+  },
+
+  mounted() {
+
+    pell.init({
+      element: document.getElementById('pell'),
+      onChange: html => {
+        this.description = html
+      },
+      actions: [
+        'bold',
+        'italic',
+        'underline',
+        'strikethrough',
+        'heading1',
+        'heading2',
+        'paragraph',
+        'quote',
+        'olist',
+        'ulist',
+        'code',
+        'line',
+        {
+          name: 'image',
+          result: () => {
+            const url = window.prompt('Enter the image URL')
+            if (url) pell.exec('insertImage', this.ensureHTTP(url))
+          }
+        },
+        {
+          name: 'link',
+          result: () => {
+            const url = window.prompt('Enter the link URL')
+            if (url) pell.exec('createLink', this.ensureHTTP(url))
+          }
+        }
+      ]
+    })
+
   },
   methods: {
     submit: function () {
@@ -71,3 +118,17 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+.pell {
+  border: 2px solid #000;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#pell-html-output {
+  margin: 0;
+  white-space: pre-wrap;
+}
+</style>
