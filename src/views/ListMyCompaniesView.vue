@@ -8,9 +8,6 @@
 
     <br>
 
-
-
-
     <div class="list">
       <table>
         <tr v-if="companies.items && companies.items.length > 0">
@@ -75,8 +72,6 @@ export default {
       console.log(url)
 
       window.location.href = url;
-
-
     },
     showCompanies() {
       const token = this.getCookie('accessToken');

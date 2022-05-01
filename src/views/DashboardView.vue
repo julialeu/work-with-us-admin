@@ -42,7 +42,6 @@ export default {
         this.username = parsedJson.name
       })
     })
-
   },
 }
 </script>

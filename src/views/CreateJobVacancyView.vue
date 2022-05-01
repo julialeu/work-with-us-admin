@@ -49,8 +49,12 @@
 </template>
 
 <script>
+import { getCookieService } from './../services/GetCookie.js'
+
 export default {
   name: "CreateJobVacancyView.vue",
+  mixins: [getCookieService],
+
   data: function () {
     return {
       title: '',
@@ -113,13 +117,6 @@ export default {
           this.$router.push('list-job-vacancies');
         })
       })
-    },
-    getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) {
-        return parts.pop().split(';').shift();
-      }
     },
 
     isFormIncomplete() {

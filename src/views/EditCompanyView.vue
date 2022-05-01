@@ -2,9 +2,8 @@
   <div>
     <h1>Editar Empresa</h1>
 
-
     <form>
-      <label for="title">* Nombre:</label><br>
+      <label for="name">* Nombre:</label><br>
       <input type="text" readonly disabled id="name" name="name" v-model="form.name"><br>
 
       <label for="description">* Descripción:</label><br>
@@ -22,10 +21,12 @@
 
 <script>
 import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
-
+import { getCookieService } from './../services/GetCookie.js'
 
 export default {
   name: "EditCompanyView.vue",
+  mixins: [getCookieService],
+
   data: function () {
     return {
       form: {
@@ -69,13 +70,6 @@ export default {
   },
 
   methods: {
-    getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) {
-        return parts.pop().split(';').shift();
-      }
-    },
     edit(e) {
       // Do not send the form
       e.preventDefault();

@@ -1,8 +1,14 @@
 <template>
   <span class="dashboard-link">
 
-    <RouterLink v-if="store.isLoggedIn" to="/dashboard">Dashboard</RouterLink>
+      <RouterLink to="/list-job-vacancies" class="button">Ofertas de empleo</RouterLink>
+      <RouterLink to="/create-job-vacancy" class="button">+ Crear Nueva Oferta</RouterLink>
+      <RouterLink to="/my-companies" class="button">Mis empresas</RouterLink>
 
+
+
+
+<!--    <RouterLink v-if="store.isLoggedIn" to="/dashboard">Dashboard</RouterLink>-->
     <RouterLink v-if="!store.isLoggedIn" to="/login">Login</RouterLink>
     <a href="#" v-if="store.isLoggedIn" v-on:click="logout" class="button">Logout</a>
 

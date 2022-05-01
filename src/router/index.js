@@ -23,41 +23,40 @@ const router = createRouter({
             component: RegisterView,
         },
         {
-            path: "/dashboard",
-            name: "dashboard",
-            component: DashboardView,
+            path: "/",
+            name: "home",
+            component: ListJobVacanciesView,
         },
-
+        // {
+        //     path: "/dashboard",
+        //     name: "dashboard",
+        //     component: DashboardView,
+        // },
         {
             path: "/my-companies",
             name: "my-companies",
             component: ListMyCompaniesView,
         },
-
         {
             path: "/create-company",
             name: "create-company",
             component: CreateCompanyView,
         },
-
         {
             path: "/edit-company",
             name: "edit-company",
             component: EditCompanyView,
         },
-
         {
             path: "/create-job-vacancy",
             name: "create-job-vacancy",
             component: CreateJobVacancyView,
         },
-
         {
             path: "/list-job-vacancies",
             name: "list-job-vacancies",
             component: ListJobVacanciesView,
         },
-
         {
             path: "/edit-job-vacancy/:uuid",
             name: "edit-job-vacancy",

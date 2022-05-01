@@ -7,7 +7,7 @@
     </h1>
 
     <div class="list">
-      <table style="min-height: 358px">
+      <table>
         <tr v-if="jobVacancies.items && jobVacancies.items.length > 0">
           <th>Estado</th>
           <th>Título</th>
@@ -35,7 +35,8 @@
           </td>
           <td>{{ item.created }}</td>
           <td>
-            <RouterLink :to="{ name: 'edit-job-vacancy', params: { 'uuid': item.uuid }} " class="button">Editar</RouterLink>
+            <RouterLink :to="{ name: 'edit-job-vacancy', params: { 'uuid': item.uuid }} " class="button">Editar
+            </RouterLink>
           </td>
 
           <td v-if="item.status === 'unpublished'">
@@ -46,6 +47,9 @@
             <a href="" @click="unpublishJobVacancyButton(item.uuid, $event)" class="button">Despublicar</a>
           </td>
 
+          <td>
+            <a href="" @click="goToJobVacancy(item.company_slug, item.url_token, $event)" class="button">Ver más</a>
+          </td>
         </tr>
       </table>
 
@@ -63,7 +67,7 @@
 
 <script>
 import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
-import { getCookieService } from './../services/GetCookie.js'
+import {getCookieService} from './../services/GetCookie.js'
 
 export default {
   name: "ListJobVacanciesView.vue",
@@ -170,6 +174,16 @@ export default {
         })
       })
     },
+    goToJobVacancy(companySlug, jobVacancyUrlToken, event) {
+      event.preventDefault();
+
+      console.log('env', import.meta.env.VITE_FULL_DOMAIN)
+
+      const url = import.meta.env.VITE_FULL_DOMAIN + '/' + companySlug + '/' + jobVacancyUrlToken
+      console.log(url)
+
+      window.location.href = url;
+    }
   }
 
 }
@@ -180,5 +194,14 @@ export default {
 .disabled {
   pointer-events: none;
   opacity: .5;
+}
+
+.list table tr {
+  margin-bottom: 20px;
+}
+
+.list table {
+  border-collapse:separate;
+  border-spacing:1em;
 }
 </style>

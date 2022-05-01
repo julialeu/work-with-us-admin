@@ -17,8 +17,12 @@
 </template>
 
 <script>
+import { getCookieService } from './../services/GetCookie.js'
+
 export default {
   name: "CreateCompanyView.vue",
+  mixins: [getCookieService],
+
   data: function () {
     return {
       name: '',
@@ -32,7 +36,6 @@ export default {
         alert('Rellena todos los campos obligatorios')
         return;
       }
-
 
       let data = {
         name: this.name,
@@ -56,13 +59,7 @@ export default {
         })
       })
     },
-    getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) {
-        return parts.pop().split(';').shift();
-      }
-    },
+
     isFormIncomplete() {
       if (this.name === '' || this.description === '') {
         return true
