@@ -42,20 +42,15 @@ export default {
         body: JSON.stringify(data)
       }).then(res => {
         let responseStatus = res.status;
-        console.log('responseStatus', responseStatus)
-        console.log(res)
 
         if (responseStatus === 400) {
           res.json().then(parsedJson => {
-            console.log('parsedJson', parsedJson)
             let errorMessage = parsedJson['errorMessage'];
             alert(errorMessage)
           })
         } else {
           res.json().then(parsedJson => {
-            console.log('parsedJson', parsedJson)
             const accessToken = parsedJson['access_token'];
-            console.log('access_token', accessToken)
 
             document.cookie = "accessToken=" + accessToken;
 

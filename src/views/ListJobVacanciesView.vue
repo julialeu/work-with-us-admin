@@ -90,9 +90,9 @@ export default {
     BounceLoader
   },
   mounted() {
-    console.log('Mounted 1')
+    // console.log('Mounted 1')
     this.navigateToPage(this.currentNumPage);
-    console.log('Mounted 2')
+    // console.log('Mounted 2')
   },
   methods: {
     publishJobVacancyButton(jobVacancyUuid, e) {
@@ -177,10 +177,7 @@ export default {
     goToJobVacancy(companySlug, jobVacancyUrlToken, event) {
       event.preventDefault();
 
-      console.log('env', import.meta.env.VITE_FULL_DOMAIN)
-
       const url = import.meta.env.VITE_FULL_DOMAIN + '/' + companySlug + '/' + jobVacancyUrlToken
-      console.log(url)
 
       window.location.href = url;
     }
@@ -194,10 +191,6 @@ export default {
 .disabled {
   pointer-events: none;
   opacity: .5;
-}
-
-.list table tr {
-  margin-bottom: 20px;
 }
 
 .list table {
