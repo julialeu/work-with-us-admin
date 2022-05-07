@@ -186,6 +186,8 @@ export default {
       }).then(res => {
         res.json().then(parsedJson => {
           this.loading = false
+
+          this.$router.push({ name: 'list-job-vacancies' })
         })
       })
     }

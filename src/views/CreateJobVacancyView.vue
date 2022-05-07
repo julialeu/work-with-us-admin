@@ -166,7 +166,7 @@ export default {
           this.username = parsedJson.name
 
           // Redirect the user to job vacancy list
-          this.$router.push('list-job-vacancies');
+          this.$router.push({ name: 'list-job-vacancies' })
         })
       })
     },

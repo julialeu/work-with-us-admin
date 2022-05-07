@@ -75,7 +75,7 @@ export default {
                 // Update storage isLoggedIn value, so "Dashboard" link is shown
                 this.store.isLoggedIn = true
 
-                this.$router.push('home');
+                this.$router.push({ name: 'home' })
               })
             }
           });

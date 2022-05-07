@@ -102,7 +102,7 @@ export default {
         res.json().then(parsedJson => {
 
           // Redirect the user to company list
-          this.$router.push('my-companies');
+          this.$router.push('/my-companies');
         })
       })
     },

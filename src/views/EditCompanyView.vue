@@ -146,7 +146,7 @@ export default {
           this.loading = false
 
           // Redirect the user to company list
-          this.$router.push('my-companies');
+          this.$router.push('/my-companies');
 
         })
       })

@@ -59,7 +59,7 @@ export default {
 
             this.store.isLoggedIn = true
 
-            this.$router.push('create-company');
+            this.$router.push('/create-company');
           })
         }
       });
