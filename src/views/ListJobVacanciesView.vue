@@ -90,9 +90,12 @@ export default {
     BounceLoader
   },
   mounted() {
-    // console.log('Mounted 1')
+    const accessToken = this.getCookie('accessToken');
+    if (accessToken === undefined) {
+      this.$router.push({name: 'login'})
+    }
+
     this.navigateToPage(this.currentNumPage);
-    // console.log('Mounted 2')
   },
   methods: {
     publishJobVacancyButton(jobVacancyUuid, e) {
