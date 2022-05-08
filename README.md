@@ -4,7 +4,7 @@
 ## Set up
 1. Clone the project
 
-   git clone git@github.com:julialeu/work-with-us.git
+   git clone git@github.com:julialeu/work-with-us-admin.git
 2. Enter to the project
    cd work-with-us-admin
 3. Create .env file
